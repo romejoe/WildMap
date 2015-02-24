@@ -15,13 +15,13 @@ import java.util.Set;
 /**
  * This map implementation supports wildcard as keys to the map.
  * <p>
- * For example:
- * put("/test/1",1)
- * put("/test/*",-1)
- *
- * get("/test/55") == -1
- * get("/test/1") == 1
- * get("/t/") == null
+ * For example:<br/>
+ * put("/test/1",1) <br/>
+ * put("/test/*",-1) <br/>
+ * <br/>
+ * get("/test/55") == -1 <br/>
+ * get("/test/1") == 1 <br/>
+ * get("/t/") == null <br/>
  * @param <V> Type of value
  */
 public class WildMap<V> implements Map<String, V> {
