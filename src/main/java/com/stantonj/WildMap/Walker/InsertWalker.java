@@ -3,6 +3,8 @@ package com.stantonj.WildMap.Walker;
 import com.stantonj.WildMap.MapNode;
 
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Handles the insertion of values into the WildMap
@@ -41,16 +43,26 @@ public class InsertWalker<V> implements iWalker<V>{
             Children.put("\\*", newNode);
         }
         else if(key.length() > 0){
-            String selector = key.substring(0,1);
+            Pattern pat = Pattern.compile("((?<=[^\\\\])\\*)|(^\\*)");
+            Matcher mat = pat.matcher(key);
+            int offset;
+            if(mat.find()) {
+                offset = mat.start();
+            }
+            else{
+                offset = key.length();
+            }
+            if(offset == 0){
+                offset = 1;
+            }
+            String selector = key.substring(0,offset);
+
             if(!Children.containsKey(selector)){
                 MapNode<V> newNode = new MapNode<V>();
                 newNode.setSelector(selector);
                 if(selector.equals("*")){
                     newNode.setWildcard(true);
                     newNode.getChildren().put("*", newNode);
-                }
-                else{
-                    newNode.setWildcard(false);
                 }
                 newNode.setParent(node);
                 //newNode.setParent(node);

@@ -7,6 +7,7 @@ public class test1 {
 
     public static void main(String[] args){
         WildMap<Integer> test = new WildMap<Integer>();
+
         test.put("/test/1", 1);
         test.put("/test/2", 2);
 
@@ -33,6 +34,7 @@ public class test1 {
         System.out.println("/name-1/ => " + test.get("/name-1/") );
         System.out.println("/name-2 => " + test.get("/name-2") );
         System.out.println("foo/bar => " + test.get("foo/bar") );
+        System.out.println("*/bar => " + test.get("*/bar") );
 
     }
 }

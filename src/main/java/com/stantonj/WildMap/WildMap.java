@@ -1,6 +1,7 @@
 package com.stantonj.WildMap;
 
 import com.stantonj.WildMap.WalkController.BreadthFirstWalkController;
+import com.stantonj.WildMap.WalkController.DepthFirstWalkController;
 import com.stantonj.WildMap.WalkController.iWalkController;
 import com.stantonj.WildMap.Walker.InsertWalker;
 import com.stantonj.WildMap.Walker.RetrieveWalker;
@@ -45,7 +46,7 @@ public class WildMap<V> implements Map<String, V> {
      * Initializes the map using a BreadthFirstWalkController<V>
      */
     public WildMap(){
-        this(new BreadthFirstWalkController<V>());
+        this(new DepthFirstWalkController<V>());
     }
 
     /**

@@ -23,6 +23,7 @@ public class MapNode<V> {
      */
     public void setValue(V value) {
         this.value = value;
+        this.isSet = true;
     }
 
     /**
@@ -90,6 +91,14 @@ public class MapNode<V> {
     }
 
     /**
+     * Determines if the value of the node has been set
+     * @return true if the value has been set, false otherwise
+     */
+    public boolean isSet() {
+        return isSet;
+    }
+
+    /**
      * Selector for the node
      * @type String
       */
@@ -100,6 +109,11 @@ public class MapNode<V> {
      * @type V
      */
     private V value;
+
+    /**
+     * Determine if the value has been set
+     */
+    private boolean isSet;
 
     /**
      * Parent of this node
