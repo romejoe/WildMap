@@ -2,30 +2,42 @@ package com.stantonj.WildMap.WalkController;
 
 import com.stantonj.WildMap.MapNode;
 import com.stantonj.WildMap.Walker.iWalker;
-import com.stantonj.WildMap.WildMap;
 
 import java.util.*;
 import java.util.concurrent.LinkedBlockingQueue;
 
+
 /**
- * Created by Joseph Stanton on 2/22/15.
+ * Implements the iWalkController using the breadth first search algorithm.
+ * @param <V>
+ * @since 0.1
+ * @author Joe Stanton
+ * @version 0.1
  */
 public class BreadthFirstWalkController<V> implements iWalkController<V> {
 
     private class WalkState{
         String Path;
         String Remainder;
-        List<String> PathParts;
+        //List<String> PathParts;
         MapNode<V> node;
     }
 
+
+    /**
+     * Implements the breadth first search algorithm to traverse the map
+     * @param initialNode Node to begin traversal at
+     * @param Key Key to use as traversal "guide"
+     * @param walker Visitor object used to operate on each node
+     * @return result of walker's operation on final node
+     */
     @Override
-    public V WalkMap(final WildMap<V> map, final String Key, iWalker<V> walker) {
+    public V WalkMap(final MapNode<V> initialNode, final String Key, iWalker<V> walker) {
         final Queue<WalkState> toCheck = new LinkedBlockingQueue<WalkState>();
         toCheck.add(new WalkState(){{
             Path = "";
             Remainder = Key;
-            node = map.getRootNode();
+            node = initialNode;
             //PathParts = new LinkedList<String>();
         }});
 

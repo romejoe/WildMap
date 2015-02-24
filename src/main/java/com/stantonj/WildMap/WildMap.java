@@ -57,13 +57,13 @@ public class WildMap<V> implements Map<String, V> {
     @Override
     public V get(Object key) {
         iWalker<V> walky = new RetrieveWalker<V>();
-        return walkController.WalkMap(this, (String) key, walky);
+        return walkController.WalkMap(rootNode, (String) key, walky);
     }
 
     @Override
     public V put(String key, V value) {
         iWalker walky = new InsertWalker<V>(value);
-        return walkController.WalkMap(this, key, walky);
+        return walkController.WalkMap(rootNode, key, walky);
     }
 
     @Override
