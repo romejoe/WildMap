@@ -1,3 +1,4 @@
+import com.stantonj.WildMap.WalkController.BreadthFirstWalkController;
 import com.stantonj.WildMap.WildMap;
 
 /**

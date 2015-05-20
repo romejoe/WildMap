@@ -4,13 +4,14 @@ import com.stantonj.WildMap.MapNode;
 import com.stantonj.WildMap.Walker.iWalker;
 
 import java.util.ArrayDeque;
+import java.util.Collection;
 import java.util.Deque;
 import java.util.Stack;
 
 /**
  * Created by Joey on 2/24/15.
  */
-public class DepthFirstWalkController<V> implements iWalkController<V> {
+public class DepthFirstWalkController<V> extends GenericWalkController<V> {
 
     private class WalkState{
         String Path;
@@ -25,12 +26,6 @@ public class DepthFirstWalkController<V> implements iWalkController<V> {
 */
     @Override
     public V WalkMap(final MapNode<V> initialNode, final String Key, iWalker<V> walker) {
-        final Deque<WalkState> toCheck = new ArrayDeque<WalkState>();
-        toCheck.addFirst(new WalkState(){{
-            Path = "";
-            Remainder = Key;
-            node = initialNode;
-        }});
 
         while(!toCheck.isEmpty()){
             WalkState curState = toCheck.removeFirst();
@@ -62,5 +57,28 @@ public class DepthFirstWalkController<V> implements iWalkController<V> {
             }
         }
         return null;
+    }
+
+
+    private Deque<WalkState> toCheck = new ArrayDeque<WalkState>();
+
+    @Override
+    public void init(WalkState initialState) {
+        toCheck.addFirst(initialState);
+    }
+
+    @Override
+    public WalkState<V> getNextWalkState() {
+        return toCheck.removeFirst();
+    }
+
+    @Override
+    public void addDescendantNodes(Collection<com.stantonj.WildMap.WalkController.WalkState> nodes, com.stantonj.WildMap.WalkController.WalkState WildcardNode) {
+
+    }
+
+    @Override
+    public boolean HasWalkState() {
+        return !toCheck.isEmpty();
     }
 }
